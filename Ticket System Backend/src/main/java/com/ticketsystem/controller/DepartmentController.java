@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/departments")
@@ -29,6 +30,17 @@ public class DepartmentController {
     public ResponseEntity<Department> add(@RequestBody Department department){
         departmentService.save(department);
         return new ResponseEntity<>(department,HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Department> delete(@PathVariable Long id){
+        Optional<Department> departmentOptional = departmentService.findById(id);
+        if (!departmentOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            departmentService.delete(id);
+            return new ResponseEntity<>(departmentOptional.get(),HttpStatus.OK);
+        }
     }
 
 
