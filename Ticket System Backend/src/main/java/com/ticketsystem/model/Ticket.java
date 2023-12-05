@@ -1,6 +1,7 @@
 package com.ticketsystem.model;
 
 
+import com.ticketsystem.model.category.SmallCategory;
 import com.ticketsystem.model.info.Priority;
 import com.ticketsystem.model.info.Status;
 import jakarta.persistence.*;
@@ -35,7 +36,10 @@ public class Ticket {
     @OneToOne
     private Priority priority;
 
-    public Ticket(String title, LocalDateTime createdAt, LocalDateTime updatedAt, Employee requester, Employee resolver, Status status, Priority priority) {
+    @OneToOne
+    private SmallCategory smallCategory;
+
+    public Ticket(String title, LocalDateTime createdAt, LocalDateTime updatedAt, Employee requester, Employee resolver, Status status, Priority priority, SmallCategory smallCategory) {
         this.title = title;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -43,5 +47,6 @@ public class Ticket {
         this.resolver = resolver;
         this.status = status;
         this.priority = priority;
+        this.smallCategory = smallCategory;
     }
 }
