@@ -1,7 +1,6 @@
 package com.ticketsystem.service;
 
-import com.ticketsystem.model.Department;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.ticketsystem.model.info.Department;
 
 import java.util.List;
 

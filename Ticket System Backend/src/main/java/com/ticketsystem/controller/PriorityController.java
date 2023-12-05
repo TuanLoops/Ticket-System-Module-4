@@ -1,6 +1,6 @@
 package com.ticketsystem.controller;
 
-import com.ticketsystem.model.Priority;
+import com.ticketsystem.model.info.Priority;
 import com.ticketsystem.service.PriorityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
