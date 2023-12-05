@@ -10,10 +10,5 @@
         <module name="TicketSystem.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="TicketSystem" target="17" />
-      <module name="TicketSystem.main" target="17" />
-      <module name="TicketSystem.test" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

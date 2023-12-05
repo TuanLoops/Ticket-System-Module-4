@@ -1,6 +1,6 @@
 package com.ticketsystem.controller;
 
-import com.ticketsystem.model.Department;
+import com.ticketsystem.model.info.Department;
 import com.ticketsystem.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

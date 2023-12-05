@@ -1,6 +1,6 @@
 package com.ticketsystem.controller;
 
-import com.ticketsystem.model.Ticket;
+import com.ticketsystem.model.info.Ticket;
 import com.ticketsystem.model.info.Status;
 import com.ticketsystem.service.TicketService;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +24,7 @@ public class TicketController {
 
     @GetMapping("/search")
     public ResponseEntity<Iterable<Ticket>> search(@RequestParam String query) {
-        return new ResponseEntity<>(ticketService.findByTitleContainingIgnoreCaseOrIdContaining(query), HttpStatus.OK);
+        return new ResponseEntity<>(ticketService.findByTitleContainingIgnoreCase(query), HttpStatus.OK);
     }
 
     @PostMapping
