@@ -35,7 +35,7 @@ public class EmploymentController {
     @DeleteMapping("{id}")
     public ResponseEntity<Employment> delete(@PathVariable Long id){
         Optional<Employment> positionOptional = employmentService.findById(id);
-        if (!positionOptional.isPresent()){
+        if (positionOptional.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             employmentService.delete(id);
@@ -46,7 +46,7 @@ public class EmploymentController {
     @PutMapping("/{id}")
     public ResponseEntity<Employment> update(@PathVariable Long id, @RequestBody Employment employment){
         Optional<Employment> positionOptional = employmentService.findById(id);
-        if (!positionOptional.isPresent()){
+        if (positionOptional.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             employment.setId(positionOptional.get().getId());
@@ -63,7 +63,7 @@ public class EmploymentController {
     @GetMapping("/search")
     public ResponseEntity<List<Employment>> getByName(@RequestParam String name) {
         System.out.println(name);
-        List<Employment> employmentList = (List<Employment>) employmentService.findByNameContain(name);
+        List<Employment> employmentList = employmentService.findByNameContain(name);
         System.out.println(employmentList);
         if (employmentList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

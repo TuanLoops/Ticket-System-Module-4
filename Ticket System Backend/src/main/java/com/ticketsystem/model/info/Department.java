@@ -1,6 +1,5 @@
 package com.ticketsystem.model.info;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +8,7 @@ import lombok.Data;
 
 @Entity
 @Data
+
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,6 @@
 package com.ticketsystem.service.impl;
 
-import com.ticketsystem.model.Department;
+import com.ticketsystem.model.info.Department;
 import com.ticketsystem.repository.IDepartmentRepository;
 import com.ticketsystem.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;

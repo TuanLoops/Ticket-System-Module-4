@@ -1,8 +1,5 @@
 package com.ticketsystem.service;
 
-import com.ticketsystem.model.Priority;
-
-import java.util.List;
 import java.util.Optional;
 
 public interface IGenericService<T>{
