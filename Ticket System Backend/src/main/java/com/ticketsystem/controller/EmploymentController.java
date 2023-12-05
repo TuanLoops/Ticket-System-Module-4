@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/positions")
+@RequestMapping("/employments")
 @CrossOrigin("*")
 public class EmploymentController {
     @Autowired
-    private IEmploymentService positionService;
+    private IEmploymentService employmentService;
     @GetMapping("")
     public ResponseEntity<Iterable<Employment>> findAllPosition(){
-        List<Employment> employmentList = (List<Employment>) positionService.findAll();
+        List<Employment> employmentList = (List<Employment>) employmentService.findAll();
         if (employmentList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -28,42 +28,42 @@ public class EmploymentController {
 
     @PostMapping("")
     public ResponseEntity<Employment> add(@RequestBody Employment employment){
-        positionService.save(employment);
+        employmentService.save(employment);
         return new ResponseEntity<>(employment,HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Employment> delete(@PathVariable Long id){
-        Optional<Employment> positionOptional = positionService.findById(id);
+        Optional<Employment> positionOptional = employmentService.findById(id);
         if (!positionOptional.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            positionService.delete(id);
+            employmentService.delete(id);
             return new ResponseEntity<>(positionOptional.get(),HttpStatus.OK);
         }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Employment> update(@PathVariable Long id, @RequestBody Employment employment){
-        Optional<Employment> positionOptional = positionService.findById(id);
+        Optional<Employment> positionOptional = employmentService.findById(id);
         if (!positionOptional.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             employment.setId(positionOptional.get().getId());
-            return new ResponseEntity<>(positionService.save(employment),HttpStatus.OK);
+            return new ResponseEntity<>(employmentService.save(employment),HttpStatus.OK);
         }
 
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Employment>findPositionById(@PathVariable Long id){
-        return new ResponseEntity<>(positionService.findById(id).get(),HttpStatus.OK) ;
+        return new ResponseEntity<>(employmentService.findById(id).get(),HttpStatus.OK) ;
     }
 
     @GetMapping("/search")
     public ResponseEntity<List<Employment>> getByName(@RequestParam String name) {
         System.out.println(name);
-        List<Employment> employmentList = (List<Employment>) positionService.findByNameContain(name);
+        List<Employment> employmentList = (List<Employment>) employmentService.findByNameContain(name);
         System.out.println(employmentList);
         if (employmentList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
