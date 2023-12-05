@@ -1,7 +1,7 @@
 package com.ticketsystem.controller;
 
 import com.ticketsystem.model.Priority;
-import com.ticketsystem.service.IGenericService;
+import com.ticketsystem.service.PriorityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/priority")
 @CrossOrigin("*")
 public class PriorityController {
-    private IGenericService<Priority> priorityService;
+    private PriorityService<Priority> priorityService;
     @GetMapping("")
     public ResponseEntity<List<Priority>> getAll() {
         List<Priority> priorities = (List<Priority>) priorityService.findAll();
