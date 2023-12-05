@@ -54,30 +54,49 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user, BindingResult bindingResult) {
+    public ResponseEntity<Object> createUser(@RequestBody User user, BindingResult bindingResult) {
+
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Iterable<User> users = userService.findAll();
-        for (User currentUser : users) {
-            if (currentUser.getUsername().equals(user.getUsername())) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+
+        User checkExistUser = userService.findByUsername(user.getUsername());
+
+        if (checkExistUser != null) {
+            return new ResponseEntity<>("Username " + user.getUsername() + " đã tồn tại !", HttpStatus.CONFLICT);
         }
+
+//        Iterable<User> users = userService.findAll();
+//        for (User currentUser : users) {
+//            if (currentUser.getUsername().equals(user.getUsername())) {
+//                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//            }
+//        }
+
         if (!userService.isCorrectConfirmPassword(user)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        if (user.getRoles() != null) {
-            Role role = roleService.findByName("ROLE_ADMIN");
-            Set<Role> roles = new HashSet<>();
-            roles.add(role);
-            user.setRoles(roles);
-        } else {
-            Role role1 = roleService.findByName("ROLE_USER");
-            Set<Role> roles1 = new HashSet<>();
-            roles1.add(role1);
-            user.setRoles(roles1);
-        }
+//        if (user.getRoles() != null) {
+//            Role role = roleService.findByName("ROLE_ADMIN");
+//            Set<Role> roles = new HashSet<>();
+//            roles.add(role);
+//            user.setRoles(roles);
+//        } else {
+//            Role role1 = roleService.findByName("ROLE_USER");
+//            Set<Role> roles1 = new HashSet<>();
+//            roles1.add(role1);
+//            user.setRoles(roles1);
+//        }
+
+        Set<Role> roles = new HashSet<>();
+        Role roleAdmin = roleService.findByName("ROLE_ADMIN");
+        Role roleUser = roleService.findByName("ROLE_USER");
+
+        roles.add(roleAdmin);
+        roles.add(roleUser);
+
+        user.setRoles(roles);
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
         userService.save(user);
@@ -96,7 +115,7 @@ public class UserController {
 
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
-        return new ResponseEntity("Hello World", HttpStatus.OK);
+        return new ResponseEntity<>("Hello World", HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
@@ -108,7 +127,7 @@ public class UserController {
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUserProfile(@PathVariable Long id, @RequestBody User user) {
         Optional<User> userOptional = this.userService.findById(id);
-        if (!userOptional.isPresent()) {
+        if (userOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         user.setId(userOptional.get().getId());
