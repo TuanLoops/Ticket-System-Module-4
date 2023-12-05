@@ -1,6 +1,6 @@
 package com.ticketsystem.service.impl;
 
-import com.ticketsystem.model.Ticket;
+import com.ticketsystem.model.info.Ticket;
 import com.ticketsystem.repository.TicketRepository;
 import com.ticketsystem.service.TicketService;
 import lombok.AllArgsConstructor;
@@ -49,8 +49,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Iterable<Ticket> findByTitleContainingIgnoreCaseOrIdContaining(String query) {
-        return ticketRepository.findByTitleContainingIgnoreCaseOrIdContaining(query, Long.parseLong(query));
+    public Iterable<Ticket> findByTitleContainingIgnoreCase(String query) {
+        return ticketRepository.findByTitleContainingIgnoreCase(query);
     }
 
     @Override
