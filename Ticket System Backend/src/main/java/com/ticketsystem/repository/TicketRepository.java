@@ -7,5 +7,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    Iterable<Ticket> findAllBySmallCategoryId(Long smallCategoryId);
+    Iterable<Ticket> findAllBySmallCategoryId(Long id);
+    Iterable<Ticket> findAllByMediumCategoryId(Long id);
+    Iterable<Ticket> findAllByLargeCategoryId(Long id);
+    Iterable<Ticket> findByTitleContainingIgnoreCaseOrIdContaining(String title, Long id);
+    Iterable<Ticket> findAllByStatusId(Long id);
+    Iterable<Ticket> findAllByRequesterId(Long id);
+    Iterable<Ticket> findAllByResolverId(Long id);
 }

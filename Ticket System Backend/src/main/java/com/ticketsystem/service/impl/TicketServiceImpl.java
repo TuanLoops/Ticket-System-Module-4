@@ -37,4 +37,35 @@ public class TicketServiceImpl implements TicketService {
     public Iterable<Ticket> findAllBySmallCategoryId(Long smallCategoryId) {
         return ticketRepository.findAllBySmallCategoryId(smallCategoryId);
     }
+
+    @Override
+    public Iterable<Ticket> findAllByMediumCategoryId(Long id) {
+        return ticketRepository.findAllByMediumCategoryId(id);
+    }
+
+    @Override
+    public Iterable<Ticket> findAllByLargeCategoryId(Long id) {
+        return ticketRepository.findAllByLargeCategoryId(id);
+    }
+
+    @Override
+    public Iterable<Ticket> findByTitleContainingIgnoreCaseOrIdContaining(String query) {
+        return ticketRepository.findByTitleContainingIgnoreCaseOrIdContaining(query, Long.parseLong(query));
+    }
+
+    @Override
+    public Iterable<Ticket> findAllByStatusId(Long id) {
+        return ticketRepository.findAllByStatusId(id);
+    }
+
+    @Override
+    public Iterable<Ticket> findAllByRequesterId(Long id) {
+        return ticketRepository.findAllByRequesterId(id);
+    }
+
+    @Override
+    public Iterable<Ticket> findAllByResolverId(Long id) {
+        return ticketRepository.findAllByResolverId(id);
+    }
+
 }

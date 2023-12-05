@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/hello/api/auth/ticket")
@@ -22,30 +23,41 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Iterable<Ticket>> search(@RequestParam String query) {
+        return new ResponseEntity<>(ticketService.findByTitleContainingIgnoreCaseOrIdContaining(query), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Ticket> add(@RequestBody Ticket ticket) {
-        ticket.setCreatedAt(LocalDateTime.now());
         Status defaultStatus = new Status();
         defaultStatus.setId(1L);
         ticket.setStatus(defaultStatus);
+        ticket.setCreatedAt(LocalDateTime.now());
+        ticket.setUpdatedAt(LocalDateTime.now());
         return new ResponseEntity<>(ticketService.save(ticket), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Ticket> edit(@PathVariable Long id, @RequestBody Ticket ticket) {
-        ticket.setId(id);
-        ticket.setUpdatedAt(LocalDateTime.now());
-        return new ResponseEntity<>(ticketService.save(ticket), HttpStatus.OK);
+        Optional<Ticket> optionalTicket = ticketService.findById(id);
+        if (optionalTicket.isPresent()) {
+            ticket.setId(id);
+            ticket.setUpdatedAt(LocalDateTime.now());
+            return new ResponseEntity<>(ticketService.save(ticket), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
-        ticketService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/category")
-    public ResponseEntity<Iterable<Ticket>> findAllBySmallCategoryId(@RequestParam Long smallCategoryId) {
-        return new ResponseEntity<>(ticketService.findAllBySmallCategoryId(smallCategoryId), HttpStatus.OK);
+        Optional<Ticket> optionalTicket = ticketService.findById(id);
+        if (optionalTicket.isPresent()) {
+            ticketService.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
