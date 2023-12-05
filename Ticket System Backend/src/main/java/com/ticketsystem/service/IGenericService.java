@@ -1,10 +1,13 @@
 package com.ticketsystem.service;
 
-import java.util.Optional;
+import com.ticketsystem.model.Priority;
+
+import java.util.List;
 
 public interface IGenericService<T>{
     Iterable<T> findAll();
-    Optional<T> findById(Long id);
+    Priority findById(Long id);
     T save(T t);
     void delete(Long id);
+    List<T> findByNameContain(String name);
 }
