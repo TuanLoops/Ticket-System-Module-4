@@ -1,6 +1,6 @@
 package com.ticketsystem.controller;
 
-import com.ticketsystem.model.Department;
+import com.ticketsystem.model.info.Department;
 import com.ticketsystem.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class DepartmentController {
     @DeleteMapping("{id}")
     public ResponseEntity<Department> delete(@PathVariable Long id){
         Optional<Department> departmentOptional = departmentService.findById(id);
-        if (!departmentOptional.isPresent()){
+        if (departmentOptional.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             departmentService.delete(id);
@@ -46,7 +46,7 @@ public class DepartmentController {
     @PutMapping("/{id}")
     public ResponseEntity<Department> update(@PathVariable Long id,@RequestBody Department department){
         Optional<Department> departmentOptional = departmentService.findById(id);
-        if (!departmentOptional.isPresent()){
+        if (departmentOptional.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             department.setId(departmentOptional.get().getId());
@@ -64,19 +64,13 @@ public class DepartmentController {
     @GetMapping("/search")
     public ResponseEntity<List<Department>> getByName(@RequestParam String name) {
         System.out.println(name);
-        List<Department> departmentList = (List<Department>) departmentService.findByNameContain(name);
+        List<Department> departmentList = departmentService.findByNameContain(name);
         System.out.println(departmentList);
         if (departmentList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(departmentList, HttpStatus.OK);
     }
-
-
-
-
-
-
 
 
 
