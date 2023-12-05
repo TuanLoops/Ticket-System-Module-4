@@ -1,6 +1,6 @@
 package com.ticketsystem.repository;
 
-import com.ticketsystem.model.info.Ticket;
+import com.ticketsystem.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

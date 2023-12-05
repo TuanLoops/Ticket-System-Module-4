@@ -1,6 +1,6 @@
 package com.ticketsystem.service.impl;
 
-import com.ticketsystem.model.info.Ticket;
+import com.ticketsystem.model.Ticket;
 import com.ticketsystem.repository.TicketRepository;
 import com.ticketsystem.service.TicketService;
 import lombok.AllArgsConstructor;

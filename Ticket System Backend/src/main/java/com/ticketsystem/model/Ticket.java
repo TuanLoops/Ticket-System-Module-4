@@ -1,8 +1,8 @@
-package com.ticketsystem.model.info;
+package com.ticketsystem.model;
 
 
 import com.ticketsystem.model.Employee;
-import com.ticketsystem.model.Priority;
+import com.ticketsystem.model.info.Priority;
 import com.ticketsystem.model.category.LargeCategory;
 import com.ticketsystem.model.category.MediumCategory;
 import com.ticketsystem.model.category.SmallCategory;
