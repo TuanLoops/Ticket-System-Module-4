@@ -43,6 +43,41 @@ public class DepartmentController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Department> update(@PathVariable Long id,@RequestBody Department department){
+        Optional<Department> departmentOptional = departmentService.findById(id);
+        if (!departmentOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            department.setId(departmentOptional.get().getId());
+            return new ResponseEntity<>(departmentService.save(department),HttpStatus.OK);
+        }
+
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Department>findDepartmentById(@PathVariable Long id){
+        return new ResponseEntity<>(departmentService.findById(id).get(),HttpStatus.OK) ;
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Department>> getByName(@RequestParam String name) {
+        System.out.println(name);
+        List<Department> departmentList = (List<Department>) departmentService.findByNameContain(name);
+        System.out.println(departmentList);
+        if (departmentList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(departmentList, HttpStatus.OK);
+    }
+
+
+
+
+
+
+
 
 
 
