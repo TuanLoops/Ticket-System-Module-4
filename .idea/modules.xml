@@ -3,9 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Ticket System - Case Module 4.iml" filepath="$PROJECT_DIR$/.idea/Ticket System - Case Module 4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TicketSystem.iml" filepath="$PROJECT_DIR$/.idea/modules/TicketSystem.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TicketSystem.main.iml" filepath="$PROJECT_DIR$/.idea/modules/TicketSystem.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TicketSystem.test.iml" filepath="$PROJECT_DIR$/.idea/modules/TicketSystem.test.iml" />
     </modules>
   </component>
 </project>

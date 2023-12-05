@@ -1,10 +1,11 @@
-package com.ticketsystem.model;
+package com.ticketsystem.model.info;
 
 
+import com.ticketsystem.model.Employee;
+import com.ticketsystem.model.Priority;
 import com.ticketsystem.model.category.LargeCategory;
 import com.ticketsystem.model.category.MediumCategory;
 import com.ticketsystem.model.category.SmallCategory;
-import com.ticketsystem.model.info.Priority;
 import com.ticketsystem.model.info.Status;
 import jakarta.persistence.*;
 import lombok.Data;
