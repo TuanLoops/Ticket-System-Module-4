@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+<<<<<<< HEAD
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Ticket System Backend" />
   </component>
+=======
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
+=======
+>>>>>>> 224b3584ab3036b334bc5243c3e397a5094a5bda
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
+>>>>>>> 0402ba82252cbeb0d89fcc1b7de6044bea17eb9d
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
