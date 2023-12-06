@@ -7,12 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/priority")
 @CrossOrigin("*")
 public class PriorityController {
-    private PriorityService<Priority> priorityService;
+    private PriorityService priorityService;
     @GetMapping("")
     public ResponseEntity<List<Priority>> getAll() {
         List<Priority> priorities = (List<Priority>) priorityService.findAll();
@@ -22,8 +23,8 @@ public class PriorityController {
         return new ResponseEntity<>(priorities, HttpStatus.OK);
     }
     @GetMapping("{id}")
-    public ResponseEntity<Priority> getOneStudent(@PathVariable Long id){
-        Priority priority = priorityService.findById(id);
+    public ResponseEntity<Optional<Priority>> getOneStudent(@PathVariable Long id){
+        Optional<Priority> priority = priorityService.findById(id);
         return new ResponseEntity<>(priority, HttpStatus.OK);
     }
 
@@ -48,7 +49,7 @@ public class PriorityController {
 
     @GetMapping("/search")
     public ResponseEntity<List<Priority>> getByName(@RequestParam String name) {
-        List<Priority> priorities = priorityService.findByNameContain(name);
+        List<Priority> priorities = (List<Priority>) priorityService.findByNameContaining(name);
         if (priorities.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
