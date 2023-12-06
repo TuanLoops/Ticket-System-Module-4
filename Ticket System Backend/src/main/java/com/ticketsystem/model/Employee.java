@@ -3,6 +3,7 @@ package com.ticketsystem.model;
 
 import com.ticketsystem.model.info.Department;
 import com.ticketsystem.model.info.Employment;
+import com.ticketsystem.model.info.Priority;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class Employee {
     @ManyToOne
     private Department department;
 
-    @ManyToOne
+    @OneToOne
     private User user;
 
     @ManyToOne

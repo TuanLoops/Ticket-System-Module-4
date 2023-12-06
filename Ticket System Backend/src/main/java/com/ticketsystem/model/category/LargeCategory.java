@@ -1,5 +1,6 @@
 package com.ticketsystem.model.category;
 
+import com.ticketsystem.model.info.Department;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,4 +13,7 @@ public class LargeCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @ManyToOne
+    private Department receivingDepartment;
 }

@@ -1,6 +1,6 @@
 package com.ticketsystem.controller;
 
-import com.ticketsystem.model.info.Ticket;
+import com.ticketsystem.model.Ticket;
 import com.ticketsystem.model.info.Status;
 import com.ticketsystem.service.TicketService;
 import lombok.AllArgsConstructor;
