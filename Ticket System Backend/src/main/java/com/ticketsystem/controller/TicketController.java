@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +24,7 @@ public class TicketController {
 
     @GetMapping("/search")
     public ResponseEntity<Iterable<Ticket>> search(@RequestParam String query) {
-        return new ResponseEntity<>(ticketService.findByTitleContainingIgnoreCaseOrIdContaining(query), HttpStatus.OK);
+        return new ResponseEntity<>(ticketService.findByTitleContainingIgnoreCase(query), HttpStatus.OK);
     }
 
     @PostMapping

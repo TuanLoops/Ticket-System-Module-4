@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/priority")
+@RequestMapping("/users/priority")
 @CrossOrigin("*")
 public class PriorityController {
     private PriorityService<Priority> priorityService;

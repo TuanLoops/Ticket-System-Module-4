@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/users/departments")
 @CrossOrigin("*")
 public class DepartmentController {
 @Autowired
@@ -71,12 +71,6 @@ public class DepartmentController {
         }
         return new ResponseEntity<>(departmentList, HttpStatus.OK);
     }
-
-
-
-
-
-
 
 
 

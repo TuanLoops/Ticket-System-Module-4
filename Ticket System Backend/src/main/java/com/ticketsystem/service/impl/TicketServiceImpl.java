@@ -49,8 +49,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Iterable<Ticket> findByTitleContainingIgnoreCaseOrIdContaining(String query) {
-        return ticketRepository.findByTitleContainingIgnoreCaseOrIdContaining(query, Long.parseLong(query));
+    public Iterable<Ticket> findByTitleContainingIgnoreCase(String query) {
+        return ticketRepository.findByTitleContainingIgnoreCase(query);
     }
 
     @Override
