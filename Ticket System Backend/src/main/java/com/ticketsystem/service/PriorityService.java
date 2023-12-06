@@ -1,11 +1,9 @@
 package com.ticketsystem.service;
 
+import com.ticketsystem.model.info.Priority;
+
 import java.util.List;
 
-public interface PriorityService<T> {
-    Iterable<T> findAll();
-    T findById(Long id);
-    T save(T t);
-    void delete(Long id);
-    List<T> findByNameContain(String name);
+public interface PriorityService extends IGenericService<Priority> {
+    Iterable<Priority> findByNameContaining (String name);
 }

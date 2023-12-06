@@ -24,7 +24,7 @@ public class Employee {
     @ManyToOne
     private Department department;
 
-    @ManyToOne
+    @OneToOne
     private User user;
 
     @ManyToOne
