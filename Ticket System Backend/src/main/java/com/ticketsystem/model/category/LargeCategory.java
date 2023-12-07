@@ -4,6 +4,7 @@ import com.ticketsystem.model.info.Department;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,4 +17,7 @@ public class LargeCategory {
 
     @ManyToOne
     private Department receivingDepartment;
+
+    @OneToMany
+    private List<MediumCategory> mediumCategory;
 }
