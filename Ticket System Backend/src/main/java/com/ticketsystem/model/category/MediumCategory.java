@@ -3,6 +3,8 @@ package com.ticketsystem.model.category;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class MediumCategory {
@@ -13,4 +15,7 @@ public class MediumCategory {
 
     @ManyToOne
     private LargeCategory largeCategory;
+
+    @OneToMany
+    private List<SmallCategory> smallCategories;
 }

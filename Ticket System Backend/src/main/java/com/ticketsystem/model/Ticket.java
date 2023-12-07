@@ -47,8 +47,6 @@ public class Ticket {
     @OneToOne
     private LargeCategory largeCategory;
 
-
-
     public Ticket(String title, LocalDateTime createdAt, LocalDateTime updatedAt, Employee requester, Employee resolver, Status status, Priority priority, SmallCategory smallCategory, MediumCategory mediumCategory, LargeCategory largeCategory) {
         this.title = title;
         this.createdAt = createdAt;

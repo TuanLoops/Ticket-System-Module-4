@@ -5,7 +5,9 @@ import com.ticketsystem.model.Role;
 import com.ticketsystem.model.User;
 import com.ticketsystem.service.RoleService;
 import com.ticketsystem.service.UserService;
+import com.ticketsystem.service.impl.EmployeeServiceImpl;
 import com.ticketsystem.service.impl.JwtService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,21 +26,14 @@ import java.util.Set;
 
 @RestController
 @CrossOrigin("*")
+@AllArgsConstructor
 public class UserController {
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private JwtService jwtService;
-
-    @Autowired
     private UserService userService;
-
-    @Autowired
     private RoleService roleService;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    private EmployeeServiceImpl employeeService;
 
 
     @GetMapping("/users")
@@ -76,30 +71,25 @@ public class UserController {
         if (!userService.isCorrectConfirmPassword(user)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-//        if (user.getRoles() != null) {
-//            Role role = roleService.findByName("ROLE_ADMIN");
-//            Set<Role> roles = new HashSet<>();
-//            roles.add(role);
-//            user.setRoles(roles);
-//        } else {
-//            Role role1 = roleService.findByName("ROLE_USER");
-//            Set<Role> roles1 = new HashSet<>();
-//            roles1.add(role1);
-//            user.setRoles(roles1);
-//        }
+        if (user.getRoles() != null) {
+            Role roleUser = roleService.findByName("ROLE_USER");
+            Role roleAdmin = roleService.findByName("ROLE_ADMIN");
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleUser);
+            roles.add(roleAdmin);
 
-        Set<Role> roles = new HashSet<>();
-        Role roleAdmin = roleService.findByName("ROLE_ADMIN");
-        Role roleUser = roleService.findByName("ROLE_USER");
-
-        roles.add(roleAdmin);
-        roles.add(roleUser);
-
-        user.setRoles(roles);
+            user.setRoles(roles);
+        } else {
+            Role role1 = roleService.findByName("ROLE_USER");
+            Set<Role> roles1 = new HashSet<>();
+            roles1.add(role1);
+            user.setRoles(roles1);
+        }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
         userService.save(user);
+        employeeService.createEmployeeByUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
