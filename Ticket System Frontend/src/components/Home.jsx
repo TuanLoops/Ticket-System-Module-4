@@ -8,7 +8,6 @@ import Resolved from "./statuses/Resolved";
 
 const Home = () => {
   const handleOpenModal = () => {
-    console.log("HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
     const modal = document.getElementById("modal");
     modal.style.display = "flex";
   };

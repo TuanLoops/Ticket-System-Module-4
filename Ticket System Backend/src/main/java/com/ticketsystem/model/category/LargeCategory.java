@@ -1,5 +1,6 @@
 package com.ticketsystem.model.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ticketsystem.model.info.Department;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -17,7 +18,4 @@ public class LargeCategory {
 
     @ManyToOne
     private Department receivingDepartment;
-
-    @OneToMany
-    private List<MediumCategory> mediumCategory;
 }

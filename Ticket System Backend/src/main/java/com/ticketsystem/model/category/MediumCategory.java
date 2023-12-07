@@ -1,5 +1,6 @@
 package com.ticketsystem.model.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,8 +15,8 @@ public class MediumCategory {
     private String name;
 
     @ManyToOne
+    @JoinColumn
     private LargeCategory largeCategory;
 
-    @OneToMany
-    private List<SmallCategory> smallCategories;
+
 }
