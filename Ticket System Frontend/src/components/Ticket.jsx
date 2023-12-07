@@ -8,7 +8,7 @@ import Resolved from "./statuses/Resolved";
 
 const Ticket = () => {
   return (
-    <div>
+    <div class="g-sidenav-show bg-gray-100 mh-100vh">
       <div className="min-height-300 bg-primary position-absolute w-100" />
       <aside
         className="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
@@ -396,12 +396,14 @@ const Ticket = () => {
                     </div>
                     <div className="col-md-12 d-flex justify-content-between">
                       <div className="d-flex">
-                        <label className="btn btn-primary bg-secondary">
+                        <label
+                          className="btn btn-primary bg-secondary me-1"
+                          htmlFor="attach-file"
+                        >
                           Attach a file
                         </label>
                         <span className="d-flex align-items-center mb-3">
-                          <input type="file"/>
-
+                          <input type="file" id="attach-file" />
                         </span>
                       </div>
                       <button className="btn btn-primary bg-success">

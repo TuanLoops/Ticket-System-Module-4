@@ -1,3 +1,4 @@
+import TicketForm from "./TicketForm";
 import High from "./priorities/High";
 import Medium from "./priorities/Medium";
 import Closed from "./statuses/Closed";
@@ -6,6 +7,20 @@ import Pending from "./statuses/Pending";
 import Resolved from "./statuses/Resolved";
 
 const Home = () => {
+  const handleOpenModal = () => {
+    console.log("HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+    const modal = document.getElementById("modal");
+    modal.style.display = "flex";
+  };
+
+  const handleCloseModal = (e) => {
+    console.log(e);
+    const modal = document.getElementById("modal");
+    if (e.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
   return (
     <div>
       <div className="min-height-300 bg-primary position-absolute w-100" />
@@ -104,25 +119,19 @@ const Home = () => {
               <div className="docs-info">
                 <h6 className="mb-0">Need help?</h6>
                 <p className="text-xs font-weight-bold mb-0">
-                  Please check our docs
+                  Please create a new ticket
                 </p>
               </div>
             </div>
           </div>
-          <a
-            href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard"
-            target="_blank"
-            className="btn btn-dark btn-sm w-100 mb-3"
-          >
-            Documentation
-          </a>
-          <a
+          <button
             className="btn btn-primary btn-sm mb-0 w-100"
-            href="https://www.creative-tim.com/product/argon-dashboard-pro?ref=sidebarfree"
+            href=""
             type="button"
+            onClick={() => {handleOpenModal()}}
           >
-            Upgrade to pro
-          </a>
+            New Ticket
+          </button>
         </div>
       </aside>
       <main className="main-content position-relative border-radius-lg ">
@@ -536,7 +545,10 @@ const Home = () => {
                             <div className="d-flex px-2 py-1">
                               <div></div>
                               <div className="d-flex flex-column justify-content-center">
-                                <h6 className="mb-0 text-sm title-width">Về việc: máy tính phòng nhân sự hỏng màn hìnhkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</h6>
+                                <h6 className="mb-0 text-sm title-width">
+                                  Về việc: máy tính phòng nhân sự hỏng màn
+                                  hìnhkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+                                </h6>
                               </div>
                             </div>
                           </td>
@@ -687,6 +699,9 @@ const Home = () => {
           </div>
         </div>
       </main>
+      <div id="modal" onClick={e => {handleCloseModal(e)}}>
+        <TicketForm />
+      </div>
     </div>
   );
 };
