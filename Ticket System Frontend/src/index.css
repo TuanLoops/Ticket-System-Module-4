@@ -13,3 +13,20 @@
 .w-150px {
     width: 150px !important;
 }
+
+.title-width {
+    max-width: 550px !important;
+    overflow: hidden;
+}
+
+.select-arrow {
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat 98% 50%;
+}
+
+textarea {
+    resize: none;
+}
+
+input[type=file]::file-selector-button {
+    display: none;
+}

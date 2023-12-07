@@ -46,7 +46,7 @@ const Home = () => {
                     height={16}
                     width={18}
                     viewBox="0 0 576 512"
-                    style={{fill:"orange"}}
+                    style={{ fill: "orange" }}
                   >
                     <path d="M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4 304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277 528 256s13.5-38.9 32.3-45.4c8.3-2.9 15.7-9.8 15.7-18.6V128c0-35.3-28.7-64-64-64H64zm64 112l0 160c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zM96 160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V160z" />
                   </svg>
@@ -510,7 +510,7 @@ const Home = () => {
                           </td>
                           <td className="align-middle">
                             <a
-                              href="javascript:;"
+                              href="/"
                               className="text-secondary font-weight-bold text-xs"
                               data-toggle="tooltip"
                               data-original-title="Edit user"
@@ -521,8 +521,12 @@ const Home = () => {
                           <td>
                             <Resolved />
                           </td>
-                          <td>14/20/2023 08:12:23</td>
-                          <td>14/20/2023 08:12:23</td>
+                          <td>
+                            <span>14/20/2023 08:12:23</span>
+                          </td>
+                          <td>
+                            <span className="mx-2">14/20/2023 08:12:23</span>
+                          </td>
                         </tr>
                         <tr>
                           <td>
@@ -532,10 +536,7 @@ const Home = () => {
                             <div className="d-flex px-2 py-1">
                               <div></div>
                               <div className="d-flex flex-column justify-content-center">
-                                <h6 className="mb-0 text-sm">Miriam Eric</h6>
-                                {/* <p className="text-xs text-secondary mb-0">
-                                  miriam@creative-tim.com
-                                </p> */}
+                                <h6 className="mb-0 text-sm title-width">Về việc: máy tính phòng nhân sự hỏng màn hìnhkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</h6>
                               </div>
                             </div>
                           </td>
@@ -557,7 +558,7 @@ const Home = () => {
                           </td>
                           <td className="align-middle">
                             <a
-                              href="javascript:;"
+                              href="/"
                               className="text-secondary font-weight-bold text-xs"
                               data-toggle="tooltip"
                               data-original-title="Edit user"
@@ -568,8 +569,12 @@ const Home = () => {
                           <td>
                             <Open />
                           </td>
-                          <td>14/20/2023 08:12:23</td>
-                          <td>14/20/2023 08:12:23</td>
+                          <td>
+                            <span>14/20/2023 08:12:23</span>
+                          </td>
+                          <td>
+                            <span className="mx-2">14/20/2023 08:12:23</span>
+                          </td>
                         </tr>
                         <tr>
                           <td>
@@ -604,7 +609,7 @@ const Home = () => {
                           </td>
                           <td className="align-middle">
                             <a
-                              href="javascript:;"
+                              href="/"
                               className="text-secondary font-weight-bold text-xs"
                               data-toggle="tooltip"
                               data-original-title="Edit user"
@@ -615,8 +620,12 @@ const Home = () => {
                           <td>
                             <Pending />
                           </td>
-                          <td>14/20/2023 08:12:23</td>
-                          <td>14/20/2023 08:12:23</td>
+                          <td>
+                            <span>14/20/2023 08:12:23</span>
+                          </td>
+                          <td>
+                            <span className="mx-2">14/20/2023 08:12:23</span>
+                          </td>
                         </tr>
                         <tr>
                           <td>
@@ -651,7 +660,7 @@ const Home = () => {
                           </td>
                           <td className="align-middle">
                             <a
-                              href="javascript:;"
+                              href="/"
                               className="text-secondary font-weight-bold text-xs"
                               data-toggle="tooltip"
                               data-original-title="Edit user"
@@ -662,8 +671,12 @@ const Home = () => {
                           <td>
                             <Closed />
                           </td>
-                          <td>14/20/2023 08:12:23</td>
-                          <td>14/20/2023 08:12:23</td>
+                          <td>
+                            <span>14/20/2023 08:12:23</span>
+                          </td>
+                          <td>
+                            <span className="mx-2">14/20/2023 08:12:23</span>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
