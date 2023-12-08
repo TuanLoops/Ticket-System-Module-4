@@ -1,54 +1,95 @@
 .w-50px {
-    width: 50px !important;
+  width: 50px !important;
 }
 
 .w-77px {
-    width: 82px !important;
+  width: 82px !important;
 }
 
 .w-100px {
-    width: 100px !important;
+  width: 100px !important;
 }
 
 .w-150px {
-    width: 150px !important;
+  width: 150px !important;
 }
 
 .title-width {
-    max-width: 550px !important;
-    overflow: hidden;
+  max-width: 550px !important;
+  overflow: hidden;
 }
 
 .select-arrow {
-    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat 98% 50%;
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat 98% 50%;
 }
 
 textarea {
-    resize: none;
+  resize: none;
 }
 
-input[type=file]::file-selector-button {
-    display: none;
+input[type="file"]::file-selector-button {
+  display: none;
 }
 
 .mh-100vh {
-    min-height: 100vh !important;
+  min-height: 100vh !important;
 }
-
 
 #modal {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(43, 43, 43, 0.671);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    z-index: 10000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(43, 43, 43, 0.671);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 10000;
 }
 
-#modal>div{
-    width: 1000px !important;
+#modal > div {
+  width: 1000px !important;
+}
+
+.ticket-row {
+  cursor: pointer;
+}
+
+.ticket-row:hover {
+  background-color: #e4e4e4 !important;
+}
+
+.ticket-aside {
+  max-width: 22.5rem !important;
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.ticket-aside > div {
+  height: 100%;
+}
+
+.ticket-aside > div > .card {
+  height: 100%;
+}
+
+#close-ticket-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(43, 43, 43, 0.671);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 10000;
 }

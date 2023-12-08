@@ -1,23 +1,50 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TicketForm from "./TicketForm";
-import High from "./priorities/High";
-import Medium from "./priorities/Medium";
-import Closed from "./statuses/Closed";
-import Open from "./statuses/Open";
-import Pending from "./statuses/Pending";
-import Resolved from "./statuses/Resolved";
+import Priority from "./priorities/Priority";
+import Status from "./statuses/Status";
+import axios from "axios";
 
 const Home = () => {
+  const [tickets, setTickets] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/users/api/auth/ticket",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
+        const data = await response.data;
+        setTickets(data);
+      } catch (error) {
+        console.log("Error", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleOpenModal = () => {
     const modal = document.getElementById("modal");
     modal.style.display = "flex";
   };
 
   const handleCloseModal = (e) => {
-    console.log(e);
     const modal = document.getElementById("modal");
-    if (e.target == modal) {
+    const submitBtn = document.getElementById("submit");
+    if (e.target == modal || e.target == submitBtn) {
       modal.style.display = "none";
     }
+  };
+
+  const openTicketDetail = (id) => {
+    navigate(`/ticket/${id}`);
   };
 
   return (
@@ -35,7 +62,7 @@ const Home = () => {
           />
           <a
             className="navbar-brand m-0"
-            href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html "
+            href="#"
             target="_blank"
           >
             <img
@@ -43,7 +70,7 @@ const Home = () => {
               className="navbar-brand-img h-100"
               alt="main_logo"
             />
-            <span className="ms-1 font-weight-bold">Argon Dashboard 2</span>
+            <span className="ms-1 font-weight-bold fs-6">Ticket System</span>
           </a>
         </div>
         <hr className="horizontal dark mt-0" />
@@ -127,7 +154,9 @@ const Home = () => {
             className="btn btn-primary btn-sm mb-0 w-100"
             href=""
             type="button"
-            onClick={() => {handleOpenModal()}}
+            onClick={() => {
+              handleOpenModal();
+            }}
           >
             New Ticket
           </button>
@@ -151,7 +180,7 @@ const Home = () => {
                   className="breadcrumb-item text-sm text-white active"
                   aria-current="page"
                 >
-                  Dashboard
+                  Tickets
                 </li>
               </ol>
               <h6 className="font-weight-bolder text-white mb-0">Dashboard</h6>
@@ -179,7 +208,7 @@ const Home = () => {
                     className="nav-link text-white font-weight-bold px-0"
                   >
                     <i className="fa fa-user me-sm-1" />
-                    <span className="d-sm-inline d-none">Sign In</span>
+                    <span className="d-sm-inline d-none"></span>
                   </a>
                 </li>
                 <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -448,7 +477,7 @@ const Home = () => {
             <div className="col-12">
               <div className="card mb-4">
                 <div className="card-header pb-0">
-                  <h6>Authors table</h6>
+                  <h6>TICKETS</h6>
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
                   <div className="table-responsive p-0">
@@ -485,210 +514,56 @@ const Home = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <span className="mx-2">123</span>
-                          </td>
-                          <td>
-                            <div className="d-flex px-2 py-1">
-                              <div></div>
-                              <div className="d-flex flex-column justify-content-center">
-                                <h6 className="mb-0 text-sm">Miriam Eric</h6>
-                                {/* <p className="text-xs text-secondary mb-0">
-                                  miriam@creative-tim.com
-                                </p> */}
+                        {tickets.map((ticket) => (
+                          <tr
+                            key={ticket.id}
+                            className="ticket-row"
+                            onClick={() => {
+                              openTicketDetail(ticket.id);
+                            }}
+                          >
+                            <td>
+                              <span className="mx-2">{ticket.id}</span>
+                            </td>
+                            <td>
+                              <div className="d-flex px-2 py-1">
+                                <div></div>
+                                <div className="d-flex flex-column justify-content-center">
+                                  <h6 className="mb-0 text-sm title-width">
+                                    {ticket.title}
+                                  </h6>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              Programtor
-                            </p>
-                            <p className="text-xs text-secondary mb-0">
-                              Developer
-                            </p>
-                          </td>
-                          <td className="align-middle text-center">
-                            <High />
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              14/09/20
-                            </span>
-                          </td>
-                          <td className="align-middle">
-                            <a
-                              href="/"
-                              className="text-secondary font-weight-bold text-xs"
-                              data-toggle="tooltip"
-                              data-original-title="Edit user"
-                            >
-                              Edit
-                            </a>
-                          </td>
-                          <td>
-                            <Resolved />
-                          </td>
-                          <td>
-                            <span>14/20/2023 08:12:23</span>
-                          </td>
-                          <td>
-                            <span className="mx-2">14/20/2023 08:12:23</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <span className="mx-2">123</span>
-                          </td>
-                          <td>
-                            <div className="d-flex px-2 py-1">
-                              <div></div>
-                              <div className="d-flex flex-column justify-content-center">
-                                <h6 className="mb-0 text-sm title-width">
-                                  Về việc: máy tính phòng nhân sự hỏng màn
-                                  hìnhkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-                                </h6>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              Programtor
-                            </p>
-                            <p className="text-xs text-secondary mb-0">
-                              Developer
-                            </p>
-                          </td>
-                          <td className="align-middle text-center">
-                            <High />
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              14/09/20
-                            </span>
-                          </td>
-                          <td className="align-middle">
-                            <a
-                              href="/"
-                              className="text-secondary font-weight-bold text-xs"
-                              data-toggle="tooltip"
-                              data-original-title="Edit user"
-                            >
-                              Edit
-                            </a>
-                          </td>
-                          <td>
-                            <Open />
-                          </td>
-                          <td>
-                            <span>14/20/2023 08:12:23</span>
-                          </td>
-                          <td>
-                            <span className="mx-2">14/20/2023 08:12:23</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <span className="mx-2">123</span>
-                          </td>
-                          <td>
-                            <div className="d-flex px-2 py-1">
-                              <div></div>
-                              <div className="d-flex flex-column justify-content-center">
-                                <h6 className="mb-0 text-sm">Miriam Eric</h6>
-                                {/* <p className="text-xs text-secondary mb-0">
-                                  miriam@creative-tim.com
-                                </p> */}
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              Programtor
-                            </p>
-                            <p className="text-xs text-secondary mb-0">
-                              Developer
-                            </p>
-                          </td>
-                          <td className="align-middle text-center">
-                            <High />
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              14/09/20
-                            </span>
-                          </td>
-                          <td className="align-middle">
-                            <a
-                              href="/"
-                              className="text-secondary font-weight-bold text-xs"
-                              data-toggle="tooltip"
-                              data-original-title="Edit user"
-                            >
-                              Edit
-                            </a>
-                          </td>
-                          <td>
-                            <Pending />
-                          </td>
-                          <td>
-                            <span>14/20/2023 08:12:23</span>
-                          </td>
-                          <td>
-                            <span className="mx-2">14/20/2023 08:12:23</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <span className="mx-2">123</span>
-                          </td>
-                          <td>
-                            <div className="d-flex px-2 py-1">
-                              <div></div>
-                              <div className="d-flex flex-column justify-content-center">
-                                <h6 className="mb-0 text-sm">Miriam Eric</h6>
-                                {/* <p className="text-xs text-secondary mb-0">
-                                  miriam@creative-tim.com
-                                </p> */}
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              Programtor
-                            </p>
-                            <p className="text-xs text-secondary mb-0">
-                              Developer
-                            </p>
-                          </td>
-                          <td className="align-middle text-center">
-                            <Medium />
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              14/09/20
-                            </span>
-                          </td>
-                          <td className="align-middle">
-                            <a
-                              href="/"
-                              className="text-secondary font-weight-bold text-xs"
-                              data-toggle="tooltip"
-                              data-original-title="Edit user"
-                            >
-                              Edit
-                            </a>
-                          </td>
-                          <td>
-                            <Closed />
-                          </td>
-                          <td>
-                            <span>14/20/2023 08:12:23</span>
-                          </td>
-                          <td>
-                            <span className="mx-2">14/20/2023 08:12:23</span>
-                          </td>
-                        </tr>
+                            </td>
+                            <td>
+                              <span className="temb-0 text-sm font-weight-bold text-center">
+                                {ticket.requester ? ticket.requester.name : ""}
+                              </span>
+                            </td>
+                            <td className="align-middle text-center">
+                              <Priority value={ticket.priority.id} />
+                            </td>
+                            <td className="align-middle text-center">
+                              <span className="temb-0 text-sm font-weight-bold">
+                                {ticket.largeCategory.receivingDepartment.name}
+                              </span>
+                            </td>
+                            <td className="align-middle">
+                              <span className="temb-0 text-sm font-weight-bold text-center">
+                                {ticket.resolver ? ticket.resolver.name : "-"}
+                              </span>
+                            </td>
+                            <td>
+                              <Status value={ticket.status.id} />
+                            </td>
+                            <td>
+                              <span>{ticket.createdAt}</span>
+                            </td>
+                            <td>
+                              <span className="mx-2">{ticket.updatedAt}</span>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -698,7 +573,12 @@ const Home = () => {
           </div>
         </div>
       </main>
-      <div id="modal" onClick={e => {handleCloseModal(e)}}>
+      <div
+        id="modal"
+        onClick={(e) => {
+          handleCloseModal(e);
+        }}
+      >
         <TicketForm />
       </div>
     </div>

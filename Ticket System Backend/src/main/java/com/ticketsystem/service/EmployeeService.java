@@ -10,4 +10,6 @@ public interface EmployeeService extends IGenericService<Employee> {
 
     Optional<Employee> findByEmail(String email);
     void createEmployeeByUser(User user);
+
+    Employee findByUser(User user);
 }

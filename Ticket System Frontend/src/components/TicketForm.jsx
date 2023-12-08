@@ -2,39 +2,86 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const TicketForm = () => {
-  const [lcs, setLcs] = useState([]);
-  const [mcs, setMcs] = useState([]);
-  const [scs, setScs] = useState([]);
-  const [largeCategory, setLargeCategory] = useState();
-  const [mediumCategory, setMediumCategory] = useState();
-  const [smallCategory, setSmallCategory] = useState();
+  const [largeCategories, setLargeCategories] = useState([]);
+  const [mediumCategories, setMediumCategories] = useState([]);
+  const [smallCategories, setSmallCategories] = useState([]);
+  const [largeCategory, setLargeCategory] = useState("");
+  const [mediumCategory, setMediumCategory] = useState("");
+  const [smallCategory, setSmallCategory] = useState("");
+  const [title, setTitle] = useState("");
+  const [detail, setDetail] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let response = await axios.get("http://localhost:8080/hello/ctg/dto");
         let data = await response.data;
-        setLcs(data);
+        setLargeCategories(data);
       } catch (error) {
         console.log("Error fetching data:", error.message);
       }
     };
     fetchData();
-  }, [lcs]);
+  }, []);
 
   const handleChangeLCategory = (e) => {
     setLargeCategory(e.target.value);
+    setMediumCategories(
+      largeCategories.find((lc) => lc.id == e.target.value).mcDtoList
+    );
+    setMediumCategory("");
+    setSmallCategory("");
   };
 
   const handleChangeMCategory = (e) => {
     setMediumCategory(e.target.value);
+    setSmallCategories(
+      mediumCategories.find((mc) => mc.id == e.target.value).scDtoList
+    );
+    setSmallCategory("");
   };
 
   const handleChangeSCategory = (e) => {
     setSmallCategory(e.target.value);
   };
 
-  function handleSubmitTicket() {}
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleChangeDetail = (e) => {
+    setDetail(e.target.value);
+  };
+
+  const handleSubmitTicket = () => {
+    const reqBody = {
+      title: title,
+      detail: detail,
+      smallCategory: {
+        id: smallCategory,
+      },
+      mediumCategory: {
+        id: mediumCategory,
+      },
+      largeCategory: {
+        id: largeCategory,
+      },
+    };
+
+    axios
+      .post("http://localhost:8080/users/api/auth/ticket", reqBody, {headers: {Authorization: `Bearer ${localStorage.getItem("accessToken")}`}})
+      .then((response) => {
+        console.log("Submission successful:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error submitting data:", error);
+      });
+    setTitle("");
+    setDetail("");
+    setLargeCategory("");
+    setMediumCategory("");
+    setSmallCategory("");
+  };
 
   return (
     <div className="container-fluid py-4">
@@ -57,8 +104,9 @@ const TicketForm = () => {
                     <input
                       className="form-control"
                       type="text"
-                      defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                       placeholder="Enter title..."
+                      value={title}
+                      onChange={handleChangeTitle}
                     />
                   </div>
                 </div>
@@ -73,13 +121,14 @@ const TicketForm = () => {
                     <select
                       className="form-control select-arrow"
                       value={largeCategory}
-                      onChange={(e) => {
-                        handleChangeLCategory(e);
-                      }}
+                      onChange={handleChangeLCategory}
                     >
-                      {lcs.map((lc, index) => (
-                        <option key={index} value={lc}>
-                          {lc.name}
+                      <option value="" disabled>
+                        -- Select Category --
+                      </option>
+                      {largeCategories.map((largeCatagory, index) => (
+                        <option key={index} value={largeCatagory.id}>
+                          {largeCatagory.name}
                         </option>
                       ))}
                     </select>
@@ -90,10 +139,17 @@ const TicketForm = () => {
                     <select
                       className="form-control select-arrow"
                       value={mediumCategory}
-                      onChange={(e) => {
-                        handleChangeMCategory(e);
-                      }}
-                    ></select>
+                      onChange={handleChangeMCategory}
+                    >
+                      <option value="" disabled>
+                        -- Select Category --
+                      </option>
+                      {mediumCategories.map((mediumCategory, index) => (
+                        <option key={index} value={mediumCategory.id}>
+                          {mediumCategory.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
                 <div className="col-md-4">
@@ -101,13 +157,16 @@ const TicketForm = () => {
                     <select
                       className="form-control select-arrow"
                       value={smallCategory}
-                      onChange={(e) => {
-                        handleChangeSCategory(e);
-                      }}
+                      onChange={handleChangeSCategory}
                     >
-                      <option>asdasd</option>
-                      <option>asdasd</option>
-                      <option></option>
+                      <option value="" disabled>
+                        -- Select Category --
+                      </option>
+                      {smallCategories.map((smallCategory, index) => (
+                        <option key={index} value={smallCategory.id}>
+                          {smallCategory.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -125,9 +184,10 @@ const TicketForm = () => {
                     <textarea
                       className="form-control"
                       type="text"
-                      defaultValue="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source."
                       cols={10}
                       rows={6}
+                      value={detail}
+                      onChange={handleChangeDetail}
                       placeholder="Describe your issue..."
                     />
                   </div>
@@ -145,6 +205,7 @@ const TicketForm = () => {
                     </span>
                   </div>
                   <button
+                    id="submit"
                     className="btn btn-primary bg-success"
                     onClick={handleSubmitTicket}
                   >

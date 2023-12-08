@@ -32,19 +32,21 @@ public class Ticket {
     @ManyToOne
     private Employee resolver;
 
-    @OneToOne
+    private String detail;
+
+    @ManyToOne
     private Status status;
 
-    @OneToOne
+    @ManyToOne
     private Priority priority;
 
-    @OneToOne
+    @ManyToOne
     private SmallCategory smallCategory;
 
-    @OneToOne
+    @ManyToOne
     private MediumCategory mediumCategory;
 
-    @OneToOne
+    @ManyToOne
     private LargeCategory largeCategory;
 
     public Ticket(String title, LocalDateTime createdAt, LocalDateTime updatedAt, Employee requester, Employee resolver, Status status, Priority priority, SmallCategory smallCategory, MediumCategory mediumCategory, LargeCategory largeCategory) {

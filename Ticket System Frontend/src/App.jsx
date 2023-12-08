@@ -4,7 +4,7 @@ import { UserProvider } from "./components/UserContext";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
-import Ticket from "./components/Ticket";
+import TicketDetail from "./components/TicketDetail";
 
 const MainRoutes = () => {
   return (
@@ -12,7 +12,7 @@ const MainRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/ticket" element={<Ticket/>} />
+      <Route path="/ticket/:id" element={<TicketDetail/>} />
     </Routes>
   );
 };

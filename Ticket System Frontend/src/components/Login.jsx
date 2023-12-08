@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useUser } from "./UserContext";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { setUser } = useUser;
+
+  const handleSubmit = async (e) => {
+    try {
+      const response = await axios.post("http://localhost:8080/login", {
+        username,
+        password,
+      });
+
+      const data = response.data;
+      const token = data.accessToken;
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("username", username);
+      localStorage.setItem("uid", data.id);
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+      alert("Invalid username or password. Please try again.");
+    }
+  };
   return (
     <main className="main-content  mt-0">
       <section>
@@ -19,18 +43,22 @@ const Login = () => {
                     <form role="form">
                       <div className="mb-3">
                         <input
-                          type="email"
+                          type="text"
                           className="form-control form-control-lg"
-                          placeholder="Email"
-                          aria-label="Email"
+                          placeholder="Username"
+                          aria-label="Username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
                         />
                       </div>
                       <div className="mb-3">
                         <input
-                          type="email"
+                          type="password"
                           className="form-control form-control-lg"
                           placeholder="Password"
                           aria-label="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
                       <div className="form-check form-switch">
@@ -50,6 +78,7 @@ const Login = () => {
                         <button
                           type="button"
                           className="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                          onClick={handleSubmit}
                         >
                           Sign in
                         </button>
@@ -60,7 +89,7 @@ const Login = () => {
                     <p className="mb-4 text-sm mx-auto">
                       Don't have an account?
                       <a
-                        href="javascript:;"
+                        href="#"
                         className="text-primary text-gradient font-weight-bold"
                       >
                         Sign up

@@ -54,4 +54,9 @@ public class EmployeeServiceImpl implements com.ticketsystem.service.EmployeeSer
         employee.setUser(user);
         employeeRepository.save(employee);
     }
+
+    @Override
+    public Employee findByUser(User user) {
+        return employeeRepository.findByUser(user);
+    }
 }
